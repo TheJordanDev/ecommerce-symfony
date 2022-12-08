@@ -42,6 +42,9 @@ class Products
     #[ORM\OneToMany(mappedBy: 'products', targetEntity: OrdersDetails::class)]
     private $ordersDetails;
 
+    #[ORM\Column(type: 'integer')]
+    private $weight;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -170,6 +173,18 @@ class Products
                 $ordersDetail->setProducts(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getWeight(): ?int
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(int $weight): self
+    {
+        $this->weight = $weight;
 
         return $this;
     }

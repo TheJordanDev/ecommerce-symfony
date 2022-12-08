@@ -23,6 +23,7 @@ class UsersFixtures extends Fixture
         $admin->setLastname('Gambier');
         $admin->setFirstname('Benoit');
         $admin->setAddress('12 rue du port');
+        $admin->setTelephone("06 06 06 06 06");
         $admin->setZipcode('75001');
         $admin->setCity('Paris');
         $admin->setPassword(
@@ -40,6 +41,7 @@ class UsersFixtures extends Fixture
             $user->setLastname($faker->lastName);
             $user->setFirstname($faker->firstName);
             $user->setAddress($faker->streetAddress);
+            $user->setTelephone($faker->phoneNumber);
             $user->setZipcode(str_replace(' ', '', $faker->postcode));
             $user->setCity($faker->city);
             $user->setPassword(

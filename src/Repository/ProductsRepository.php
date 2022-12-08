@@ -71,6 +71,31 @@ class ProductsRepository extends ServiceEntityRepository
     }
     */
 
+    public function findByPriceUnder($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.price <= :val')
+            ->setParameter('val', $value*100)
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getProduitsOfCategory($category)
+    {
+        return $this->createQueryBuilder('p')
+            ->from("\App\Entity\Categories",'c')
+            ->andWhere('c.name = :category')
+            ->andWHere('p.categories = c.id')
+            ->setParameter('category', $category)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Products
     {

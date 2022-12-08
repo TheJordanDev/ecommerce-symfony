@@ -120,7 +120,7 @@ class RegistrationController extends AbstractController
             'alg' => 'HS256'
         ];
 
-        // On crée le Payload
+        // On crée le Payload 
         $payload = [
             'user_id' => $user->getId()
         ];

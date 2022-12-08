@@ -14,7 +14,13 @@ class ImagesFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for($img = 1; $img <= 100; $img++){
+        $image = new Images();
+        $image->setName("ecran.jpg");
+        $product = $this->getReference('prod-69');
+        $image->setProducts($product);
+        $manager->persist($image);
+
+        for($img = 1; $img <= 10; $img++){
             $image = new Images();
             $image->setName($faker->image(null, 640, 480));
             $product = $this->getReference('prod-'.rand(1, 10));

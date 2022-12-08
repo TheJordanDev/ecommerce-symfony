@@ -16,4 +16,10 @@ class MainController extends AbstractController
             'categories' => $categoriesRepository->findBy([], ['categoryOrder' => 'asc'])
         ]);
     }
+
+    #[Route('/credits', name: 'credits')]
+    public function credit(): Response
+    {
+        return $this->render('main/credit.html.twig', []);
+    }
 }

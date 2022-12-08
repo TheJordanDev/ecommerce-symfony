@@ -51,8 +51,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $is_verified = false;
 
-    #[ORM\Column(type: 'string', length: 100)]
-    private $resetToken;
+    #[ORM\Column(type: 'string', length: 20)]
+    private $telephone = false;
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Orders::class)]
     private $orders;
@@ -190,6 +190,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->city = $city;
 
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
+        
         return $this;
     }
 
