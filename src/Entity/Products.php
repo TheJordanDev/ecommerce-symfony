@@ -45,11 +45,15 @@ class Products
     #[ORM\Column(type: 'integer')]
     private $weight;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Stocks::class)]
+    private Collection $stocks;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->ordersDetails = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
+        $this->stocks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -188,4 +192,35 @@ class Products
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Stocks>
+     */
+    public function getStocks(): Collection
+    {
+        return $this->stocks;
+    }
+
+    public function addStock(Stocks $stock): self
+    {
+        if (!$this->stocks->contains($stock)) {
+            $this->stocks->add($stock);
+            $stock->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStock(Stocks $stock): self
+    {
+        if ($this->stocks->removeElement($stock)) {
+            // set the owning side to null (unless already changed)
+            if ($stock->getProduct() === $this) {
+                $stock->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

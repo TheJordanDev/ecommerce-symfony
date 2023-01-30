@@ -3,7 +3,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Products;
+use App\Entity\Stocks;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Faker;
@@ -40,7 +42,8 @@ class ProductsFixtures extends Fixture
             $product->setWeight($faker->numberBetween(1, 10));
 
             //On va chercher une référence de catégorie
-            $category = $this->getReference('cat-'. rand(1, 8));
+            $possibleCats = array(2,3,4,6,7,8);
+            $category = $this->getReference('cat-'. $possibleCats[rand(0, count($possibleCats)-1)]);
             $product->setCategories($category);
 
             $this->setReference('prod-'.$prod, $product);
